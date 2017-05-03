@@ -1,6 +1,6 @@
 marchio-lambda-get
 ==
-PUT DESCRIPTION HERE
+REST GET from DynamoDB via Lambda
 --
 
 <p align="left">

@@ -8,6 +8,11 @@
 
 "use strict";
 
+require('dotenv').config();
+
+var adapterFactory = require('@mitchallen/lambda-adapter');
+var getFactory = require('./db-get');
+
 /**
  * Module
  * @module marchio-lambda-get
@@ -23,60 +28,77 @@
  * Factory method 
  * It takes one spec parameter that must be an object with named parameters
  * @param {Object} spec Named parameters object
+ * @param {Object} spec.event Lambda event
+ * @param {Object} spec.context Lambda context
+ * @param {function} spec.callback Lambda callback
+ * @param {Object} spec.model - Table model
  * @returns {Promise} that resolves to {module:marchio-lambda-get}
  * @example <caption>Usage example</caption>
-    var factory = require("marchio-lambda-get");
- 
-    factory.create({})
-    .then(function(obj) {
-        return obj.health();
-    })
-    .catch( function(err) { 
-        console.error(err); 
-    });
+ * // Lambda root file
+ * "use strict";
+ * 
+ * var mlFactory = require('marcio-lambda-get'); 
+ * 
+ * exports.handler = function(event, context, callback) {
+ * 
+ *     var model = {
+ *         name: 'mldb',   // must match DynamoDB table name
+ *         primary: 'eid', // primary key - cannot be reserved word (like uuid)
+ *         fields: {
+ *             email:    { type: String, required: true },
+ *             status:   { type: String, required: true, default: "NEW" },
+ *             // Password will be (fake) hashed by filter before being saved
+ *             password: { type: String, select: false },  // select: false, exclude from query results
+ *         }
+ *     };
+ * 
+ *     mlFactory.create({ 
+ *         event: event, 
+ *         context: context,
+ *         callback: callback,
+ *         model: model
+ *     })
+ *     .catch(function(err) {
+ *         callback(err);
+ *     });
+ *  };
  */
 module.exports.create = (spec) => {
 
-    return new Promise((resolve, reject) => {
+    spec = spec || {};
 
-        spec = spec || {};
+    if(!spec.event) {
+        return Promise.reject("event parameter not set");
+    }
 
-        // reject("reason");
+    if(!spec.context) {
+        return Promise.reject("context parameter not set");
+    }
 
-        // private 
-        let _package = "marchio-lambda-get";
+    if(!spec.context.functionName) {
+        return Promise.reject("context.functionName parameter not defined");
+    }
 
-        resolve({
-            // public
-            /** Returns the package name
-              * @function
-              * @instance
-              * @memberof module:marchio-lambda-get
-            */
-            package: () => _package,
-            /** Health check
-              * @function
-              * @instance
-              * @memberof module:marchio-lambda-get
-              * @example <caption>Usage Example</caption>
-                var factory = require("marchio-lambda-get");
-             
-                factory.create({})
-                .then(function(obj) {
-                    return obj.health();
-                })
-                .then(function(result) {
-                    console.log("HEALTH: ", result);
-                })
-                .catch( function(err) { 
-                    console.error(err); 
+    if(!spec.callback) {
+        return Promise.reject("callback parameter not set");
+    }
+
+    if(!spec.model) {
+        return Promise.reject("model parameter not set");
+    }
+
+    spec.regex = `/${spec.context.functionName}/:model/:id`;
+
+    const marchio = spec;
+
+    return  adapterFactory.create(spec)
+            .then( (adapter) => {
+                return getFactory.create({ 
+                    adapter: adapter,
+                    marchio: marchio 
                 });
-            */
-            health: function() {
-                return new Promise((resolve,reject) => {
-                    resolve("OK");
-                });
-            }
-        });
-    });
+            })
+            .catch(function(err) {
+                spec.callback(err);
+            });
 };
