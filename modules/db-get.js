@@ -95,8 +95,8 @@ module.exports.create = ( spec ) => {
         var getObject = {
             "TableName": model.name,
             "Key": _key,
-            "ProjectionExpression": '',   // comma sep list of field expresion attributes "#email,#status"
-            "ExpressionAttributeNames": ''  // object { '#email': "email" }
+            "ProjectionExpression": _pExp,              // comma sep list of field expresion attributes "#email,#status"
+            "ExpressionAttributeNames": _expAttrNames   // object { '#email': "email" }
         };
         return Promise.all([
                 docClient.getItem( getObject ).promise(),
@@ -106,16 +106,20 @@ module.exports.create = ( spec ) => {
     .then( (o) => {
         var record = o[0],
             dbId = o[1];
-        var resObject = {
-            statusCode: 200,  
-            headers: {
-                "Content-Type" : "application/json",
-                "Location": "/" + [ model.name, dbId ].join('/')
-            },
-            body: record
-        };
-        res
-            .json(resObject);
+        if( record && record.Item ) {
+            var resObject = {
+                statusCode: 200,  
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Location": "/" + [ model.name, dbId ].join('/')
+                },
+                body: record.Item
+            };
+            res
+                .json(resObject);
+        } else {
+            return Promise.reject(404);
+        }
     })
     .catch( (err) => {  
         if(err) {

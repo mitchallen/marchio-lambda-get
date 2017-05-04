@@ -49,12 +49,13 @@ REST GET from DynamoDB via Lambda
 * Click: __Roles__ (from the left column)
 * Click: __Create new role__
 * __Step 1: Select role type__
+ * Expand Section: __AWS Service Role__
  * For __AWS Lambda__, click: __Select__
 * __Step 2__ is automatically skipped
 * __Step 3: Attach policy__
  * Select both __AmazonDynamoDB*__ policies
 * Click: __Next Step__
-* Create a name for the role (like __lambda-db-test__)
+* Create a name for the role (like __lambda-test__)
 * Click: __Create role__
 
 #### Create Lambda Function
@@ -66,7 +67,9 @@ REST GET from DynamoDB via Lambda
 * Name: __marchio-get__
 * Description: __Marchio service__
 * Runtime: __Node.js 4.3__
-* Set the __Role__ values
+* Set the __Role__
+ * Role: __Choose and existing role__
+ * Existing role: __service-role/__(name of role you created earlier)
 * Click: __Next__
 * Click: __Create Function__
 
@@ -165,6 +168,14 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.1.2
+
+* Updated service to only return record and not Item wrapper.
+
+#### Version 0.1.1
+
+* Fixed issue with object passed to DynamoDB.getItem
 
 #### Version 0.1.0 
 
