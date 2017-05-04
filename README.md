@@ -135,7 +135,7 @@ To test:
 
 ```
 $ curl -i -X GET -H "Accept: applications/json" \
-  $AWS_HOST_MARCHIO_GET/test/marchio/mldb/110ec58a-a0f2-4ac4-8393-c866d813b8d1
+  $AWS_HOST_MARCHIO_GET/test/marchio-get/mldb/110ec58a-a0f2-4ac4-8393-c866d813b8d1
 ```
 * The response should contain a 201 status code and a copy of the created record, along with its id (eid)
 * Browse the DynamoDB table to see the new record.
