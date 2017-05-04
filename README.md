@@ -53,9 +53,9 @@ REST GET from DynamoDB via Lambda
  * For __AWS Lambda__, click: __Select__
 * __Step 2__ is automatically skipped
 * __Step 3: Attach policy__
- * Select both __AmazonDynamoDB*__ policies
+ * Select __AmazonDynamoDBReadOnlyAccess__ policiy
 * Click: __Next Step__
-* Create a name for the role (like __lambda-test__)
+* Create a name for the role (like __lambda-db-get-only__)
 * Click: __Create role__
 
 #### Create Lambda Function
@@ -168,6 +168,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.1.3
+
+* Updated role documentation
 
 #### Version 0.1.2
 
