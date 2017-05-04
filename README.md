@@ -195,6 +195,7 @@ exports.handler = function(event, context, callback) {
         name: 'mldb',   // must match DynamoDB table name
         primary: 'eid', // primary key - cannot be reserved word (like uuid)
         fields: {
+            eid:      { type: String },  // return eid / primary in GET results
             email:    { type: String, required: true },
             status:   { type: String, required: true, default: "NEW" },
             // Password will be (fake) hashed by filter before being saved
@@ -239,6 +240,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.1.5
+
+* Updated doc and demo deploy to show how to return primary key if required
 
 #### Version 0.1.4
 
