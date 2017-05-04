@@ -130,12 +130,12 @@ $ chmod +x deploy-lambda.sh
 To test:
 
 * Deploy the API via API Gateway
-* Create an environment variable called __AWS\_HOST\_MARCHIO__ which is set to the invocation url
+* Create an environment variable called __AWS\_HOST\_MARCHIO\_GET__ which is set to the invocation url
 * Test the deployment using __curl__ (substitute a valid __eid__ value):
 
 ```
 $ curl -i -X GET -H "Accept: applications/json" \
-  $AWS_HOST_MARCHIO/test/marchio/mldb/110ec58a-a0f2-4ac4-8393-c866d813b8d1
+  $AWS_HOST_MARCHIO_GET/test/marchio/mldb/110ec58a-a0f2-4ac4-8393-c866d813b8d1
 ```
 * The response should contain a 201 status code and a copy of the created record, along with its id (eid)
 * Browse the DynamoDB table to see the new record.
