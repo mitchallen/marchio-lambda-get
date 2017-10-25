@@ -54,7 +54,6 @@ exports.handler = function(event, context, callback) {
             // gid:      { type: String },  // return gid / primary sort in GET results
             email:    { type: String, required: true },
             status:   { type: String, required: true, default: "NEW" },
-            // Password will be (fake) hashed by filter before being saved
             password: { type: String, select: false },  // select: false, exclude from query results
         }
     };
