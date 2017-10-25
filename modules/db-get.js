@@ -30,7 +30,8 @@ module.exports.create = ( spec ) => {
           res = adapter.response,
           env = adapter.env;
 
-    const primaryKey = model.primary,
+    const partition = model.partition,
+          sortKey = model.sort,
           jsonp = query.jsonp || false,
           cb = query.cb || 'callback';
 
@@ -64,13 +65,19 @@ module.exports.create = ( spec ) => {
         return;
     }
 
-    // TODO - check primaryKey against DynamoDB reserved words
-    if(!primaryKey) {
-        throw new Error('dp-get: model.primary not defined.');
+    // TODO - check partition against DynamoDB reserved words
+    if(!partition) {
+        throw new Error('dp-get: model.partition not defined.');
     }
 
     return crFactory.create( { model: model } )
     .then( o => {
+        if(model.primary) {
+            throw new Error( "ERROR: marchio-lambda-get: model.primary should now be model.partition" );
+        }
+        if(!partition) {
+            throw new Error( "ERROR: marchio-lambda-get: model.partition not defined" );
+        }
         recMgr = o;  
         return recMgr.selectedFields();  
     })
@@ -83,7 +90,7 @@ module.exports.create = ( spec ) => {
         if(!dbId) {
             return Promise.reject(404);
         }
-        _key[ primaryKey ] = dbId;  
+        _key[ partition ] = dbId;  
         var _pExp = "";
         var _expAttrNames = {};
         for( var i = 0; i < sfList.length; i++ ) {

@@ -4,12 +4,14 @@
   "description": "Example Lambda deployment",
   "main": "lambda.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "put": "curl -i -X PUT -H \"Content-Type: application/json\" -d '{\"email\":\"get@test.com\",\"password\":\"$4xz62\",\"status\":\"TEST\"}' $AWS_HOST_MARCHIO_PUT/test/marchio-put/mldb/12345",
+    "demo": "npm run put && curl -i -X GET -H \"Accept: applications/json\" $AWS_HOST_MARCHIO_GET/test/marchio-get/mldb/12345"
   },
   "author": "Mitch Allen",
   "license": "MIT",
   "dependencies": {
-    "marchio-lambda-get": "file:///Users/mitch/nodejs/marchiojs/marchio-lambda-get/marchio-kit.tgz",
+    "marchio-lambda-get": "file:marchio-kit.tgz",
     "marchio-lambda-patch": "file:///Users/mitch/nodejs/marchiojs/marchio-lambda-patch/marchio-kit.tgz"
   }
 }

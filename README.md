@@ -193,7 +193,7 @@ exports.handler = function(event, context, callback) {
 
     var model = {
         name: 'mldb',   // must match DynamoDB table name
-        primary: 'eid', // primary key - cannot be reserved word (like uuid)
+        partition: 'eid', // primary partition key - cannot be reserved word (like uuid)
         fields: {
             eid:      { type: String },  // return eid / primary in GET results
             email:    { type: String, required: true },
@@ -240,6 +240,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.2.0
+
+* Change model.primary to model.partition
 
 #### Version 0.1.5
 

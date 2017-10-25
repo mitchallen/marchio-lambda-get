@@ -43,7 +43,7 @@ var getFactory = require('./db-get');
  * 
  *     var model = {
  *         name: 'mldb',   // must match DynamoDB table name
- *         primary: 'eid', // primary key - cannot be reserved word (like uuid)
+ *         partition: 'eid', // primary partition key - cannot be reserved word (like uuid)
  *         fields: {
  *             eid:      { type: String },  // return eid / primary in GET results
  *             email:    { type: String, required: true },
