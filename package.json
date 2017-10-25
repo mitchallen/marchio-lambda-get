@@ -1,6 +1,6 @@
 {
   "name": "marchio-lambda-get",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "REST GET from DynamoDB via Lambda",
   "main": "modules/index.js",
   "scripts": {
