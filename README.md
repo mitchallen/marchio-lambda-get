@@ -245,7 +245,7 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 #### Version 0.3.0
 
 * removed model/table name from url
-* updated deployment examples
+* updated deploy-build examples
 
 #### Version 0.2.2
 
