@@ -30,8 +30,8 @@ module.exports.create = ( spec ) => {
           res = adapter.response,
           env = adapter.env;
 
-    const partition = model.partition,
-          sortKey = model.sort,
+    const partition = model.partition || null,
+          sort = model.sort || null,
           jsonp = query.jsonp || false,
           cb = query.cb || 'callback';
 
@@ -86,11 +86,17 @@ module.exports.create = ( spec ) => {
             return Promise.reject(404);
         }
         var _key = {};
-        const dbId = params.id;
+
+        const dbId = params.partition;
         if(!dbId) {
             return Promise.reject(404);
         }
-        _key[ partition ] = dbId;  
+        _key[ partition ] = dbId; 
+
+        if( sort && params.sort ) {
+            _key[sort] = params.sort;
+        }
+
         var _pExp = "";
         var _expAttrNames = {};
         for( var i = 0; i < sfList.length; i++ ) {

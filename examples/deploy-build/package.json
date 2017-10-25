@@ -5,8 +5,9 @@
   "main": "lambda.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "put": "curl -i -X PUT -H \"Content-Type: application/json\" -d '{\"email\":\"get@test.com\",\"password\":\"$4xz62\",\"status\":\"TEST\"}' $AWS_HOST_MARCHIO_PUT/test/marchio-put/mldb/12345",
-    "demo": "npm run put && curl -i -X GET -H \"Accept: applications/json\" $AWS_HOST_MARCHIO_GET/test/marchio-get/mldb/12345"
+    "put1": "curl -i -X PUT -H \"Content-Type: application/json\" -d '{\"email\":\"get@test.com\",\"password\":\"$4xz62\",\"status\":\"TEST\"}' $AWS_HOST_MARCHIO_PUT/test/marchio-put/mldb/12345",
+    "get1": "curl -i -X GET -H \"Accept: applications/json\" $AWS_HOST_MARCHIO_GET/test/marchio-get/mldb/12345",
+    "demo": "npm run put1 && npm run get1"
   },
   "author": "Mitch Allen",
   "license": "MIT",
