@@ -5,16 +5,15 @@
   "main": "lambda.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "put1": "curl -i -X PUT -H \"Content-Type: application/json\" -d '{\"email\":\"get-sort1@test.com\",\"password\":\"$4xz62\",\"status\":\"TEST\"}' $AWS_HOST_MARCHIO_PUT_SORT/test/marchio-put-sort/mldb-sort/12345/abc1",
-    "put2": "curl -i -X PUT -H \"Content-Type: application/json\" -d '{\"email\":\"get-sort2@test.com\",\"password\":\"$4xz62\",\"status\":\"TEST\"}' $AWS_HOST_MARCHIO_PUT_SORT/test/marchio-put-sort/mldb-sort/12345/abc2",
-    "get1": "curl -i -X GET -H \"Accept: applications/json\" $AWS_HOST_MARCHIO_GET_SORT/test/marchio-get-sort/mldb-sort/12345/abc1",
-    "get2": "curl -i -X GET -H \"Accept: applications/json\" $AWS_HOST_MARCHIO_GET_SORT/test/marchio-get-sort/mldb-sort/12345/abc2",
+    "put1": "curl -i -X PUT -H \"Content-Type: application/json\" -d '{\"email\":\"get-sort1@test.com\",\"password\":\"$4xz62\",\"status\":\"TEST\"}' $AWS_HOST_MARCHIO_PUT_SORT/test/marchio-put-sort/12345/abc1",
+    "put2": "curl -i -X PUT -H \"Content-Type: application/json\" -d '{\"email\":\"get-sort2@test.com\",\"password\":\"$4xz62\",\"status\":\"TEST\"}' $AWS_HOST_MARCHIO_PUT_SORT/test/marchio-put-sort/12345/abc2",
+    "get1": "curl -i -X GET -H \"Accept: applications/json\" $AWS_HOST_MARCHIO_GET_SORT/test/marchio-get-sort/12345/abc1",
+    "get2": "curl -i -X GET -H \"Accept: applications/json\" $AWS_HOST_MARCHIO_GET_SORT/test/marchio-get-sort/12345/abc2",
     "demo": "npm run put1 && npm run put2 && npm run get1 && npm run get2"
   },
   "author": "Mitch Allen",
   "license": "MIT",
   "dependencies": {
-    "marchio-lambda-get": "file:marchio-kit.tgz",
-    "marchio-lambda-patch": "file:///Users/mitch/nodejs/marchiojs/marchio-lambda-patch/marchio-kit.tgz"
+    "marchio-lambda-get": "file:marchio-kit.tgz"
   }
 }

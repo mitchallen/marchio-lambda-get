@@ -68,7 +68,7 @@ describe('deployment smoke test', () => {
                 }
             };
 
-            var _postUrl = `${_testPostPath}/${_testModel.name}`;
+            var _postUrl = `${_testPostPath}`;
             // console.log(`POST URL: ${_postUrl}`);
 
             it('get should succeed', done => {
@@ -96,7 +96,7 @@ describe('deployment smoke test', () => {
                         res.header.location.should.eql(`/${_testModel.name}/${res.body[_testModel.key]}`)
                         should.exist(res.body.eid);
                         var _saveKey = res.body.eid;
-                        var _getUrl = `${_testGetPath}/${_testModel.name}/${res.body.eid}`;
+                        var _getUrl = `${_testGetPath}/${res.body.eid}`;
                         // console.log("GET URL: ", _getUrl );
                         request(_testGetHost)
                             .get(_getUrl)
@@ -118,7 +118,7 @@ describe('deployment smoke test', () => {
 
             it('get with invalid model id in url should return 404', done => {
                 // console.log(`TEST HOST: ${_testPostHost} `);
-                var _invalidGetUrl = `${_testGetPath}/${_testModel.name}/bogus`;
+                var _invalidGetUrl = `${_testGetPath}/bogus`;
                 request(_testGetHost)
                     .get(_invalidGetUrl)
                     .set('Content-Type', 'application/json')

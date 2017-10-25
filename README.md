@@ -138,7 +138,7 @@ To test:
 
 ```
 $ curl -i -X GET -H "Accept: applications/json" \
-  $AWS_HOST_MARCHIO_GET/test/marchio-get/mldb/110ec58a-a0f2-4ac4-8393-c866d813b8d1
+  $AWS_HOST_MARCHIO_GET/test/marchio-get/110ec58a-a0f2-4ac4-8393-c866d813b8d1
 ```
 * The response should contain a 200 status code and a copy of the record.
 
@@ -241,6 +241,11 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.3.0
+
+* removed model/table name from url
+* updated deployment examples
 
 #### Version 0.2.2
 
