@@ -12,6 +12,6 @@
   "author": "Mitch Allen",
   "license": "MIT",
   "dependencies": {
-    "marchio-lambda-get": "^0.2.2"
+    "marchio-lambda-get": "^0.3.0"
   }
 }
